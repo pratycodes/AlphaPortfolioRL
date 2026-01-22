@@ -1,7 +1,3 @@
-The `README.md` has been updated with the specific citation for the research paper you implemented.
-
----
-
 # AlphaPortfolioRL
 
 **AlphaPortfolioRL** is an institutional-grade algorithmic trading system that leverages Deep Reinforcement Learning (DRL) for dynamic portfolio optimization. The system utilizes a **Deep Deterministic Policy Gradient (DDPG)** agent, augmented with **Generative Adversarial Networks (GANs)** for data augmentation and a **Convex Optimization Oracle** for behavioral cloning.
