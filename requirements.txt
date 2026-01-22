@@ -1,0 +1,9 @@
+torch
+gymnasium
+numpy
+pandas
+yfinance
+cvxpy
+pydantic
+matplotlib
+scikit-learn
