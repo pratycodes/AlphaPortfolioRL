@@ -1,6 +1,5 @@
 import numpy as np
 import torch
-import pandas
 import os
 
 from config.settings import config
@@ -18,7 +17,7 @@ from utils.logger import setup_logger
 logger = setup_logger()
 
 def train():
-    # ==================== Setup ====================
+    # Setup
     np.random.seed(config.SEED)
     torch.manual_seed(config.SEED)
     if torch.cuda.is_available():
@@ -56,10 +55,9 @@ def train():
 
     logger.info("Starting RL Training.")
     
-    # ==================== TRACKING VARIABLES ====================
     best_value = -np.inf
-    ema_value = 10000.0  # Initialize at starting cash
-    MIN_SAVE_EPISODE = 20  # Don't save early lucky runs
+    ema_value = 10000.0  
+    MIN_SAVE_EPISODE = 20  
     
     for episode in range(config.EPISODES):
         obs, _ = env.reset()
@@ -71,7 +69,6 @@ def train():
         noise_scale = max(config.MIN_NOISE, config.INIT_NOISE * (1.0 - episode / config.EPISODES))
         oracle_weight = max(0.0, 1.0 - episode / config.ORACLE_ANNEAL_EPISODES)
 
-        # GAN Injection
         if gan and episode % 5 == 0: 
             with torch.no_grad():
                 noise = torch.randn(64, config.GAN_SEQ_LEN, config.GAN_NOISE_DIM).to(agent.device)
@@ -118,10 +115,7 @@ def train():
             prev_weights = next_prev_weights
             episode_reward += reward
 
-        # ==================== EMA FILTER & MODEL SAVING ====================
-        
-        # Update Exponential Moving Average (EMA) of Portfolio Value
-        # Alpha = 0.1 means we value history (0.9) more than the latest episode (0.1)
+        # EMA filter for Model Saving
         ema_value = 0.9 * ema_value + 0.1 * env.portfolio_value
         
         # Diagnostic Logging
@@ -129,19 +123,17 @@ def train():
             f"Ep {episode+1:03d} | "
             f"Rew: {episode_reward:7.2f} | "
             f"Val: {env.portfolio_value:10.2f} | "
-            f"EMA: {ema_value:10.2f} | "  # Watch this line!
+            f"EMA: {ema_value:10.2f} | " 
             f"Noise: {noise_scale:.3f} | "
             f"Oracle: {oracle_weight:.2f}"
         )
 
-        # Periodic Checkpoint (Safety Net)
         if (episode + 1) % config.CHECKPOINT_FREQ == 0:
             torch.save(agent.actor.state_dict(), f"models/actor_ep_{episode+1}.pth")
             torch.save(ipm.state_dict(), f"models/ipm_ep_{episode+1}.pth")
 
-        # BEST MODEL LOGIC (Filtered by EMA)
+    
         if (episode + 1) >= MIN_SAVE_EPISODE:
-            # We check if the SMOOTHED value is a new record
             if ema_value > best_value:
                 best_value = ema_value
                 
