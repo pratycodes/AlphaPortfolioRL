@@ -1,9 +1,18 @@
 from typing import List
 from pydantic_settings import BaseSettings
+import torch
 
 class Settings(BaseSettings):
     SEED: int = 42
-
+    
+    # Device
+    if torch.cuda.is_available():
+        DEVICE: str = "cuda"
+    elif torch.backends.mps.is_available():
+        DEVICE: str = "mps"
+    else:
+        DEVICE: str = "cpu"
+        
     # Data
     ASSETS: List[str] = ["AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "JPM"]
     TRAIN_START_DATE: str = "2010-01-01"
