@@ -1,0 +1,13 @@
+2026-01-22 11:20:41 | INFO     | logger:52 | Logger initialized. Writing logs to logs/run_20260122_112041.log
+2026-01-22 11:20:41 | INFO     | tearsheet:26 | Generating Professional Tearsheet...
+2026-01-22 11:20:43 | INFO     | tearsheet:19 | Fetching S&P 500 Benchmark Data...
+2026-01-22 11:20:44 | INFO     | tearsheet:42 | Loading Actor weights: models/best_actor.pth
+2026-01-22 11:20:44 | INFO     | tearsheet:46 | Loading IPM weights: models/best_ipm.pth
+2026-01-22 11:20:45 | INFO     | tearsheet:115 | Metric               | RL Agent        | Eq-Weight       | S&P 500        
+2026-01-22 11:20:45 | INFO     | tearsheet:116 | ---------------------------------------------------------------------------
+2026-01-22 11:20:45 | INFO     | tearsheet:118 | Total Return         | 0.3453          | 0.2445          | 0.1634         
+2026-01-22 11:20:45 | INFO     | tearsheet:118 | Annual Volatility    | 0.3612          | 0.2774          | 0.1906         
+2026-01-22 11:20:45 | INFO     | tearsheet:118 | Sharpe Ratio         | 1.0489          | 0.9721          | 0.9355         
+2026-01-22 11:20:45 | INFO     | tearsheet:118 | Sortino Ratio        | 1.7140          | 1.4099          | 1.1733         
+2026-01-22 11:20:45 | INFO     | tearsheet:118 | Max Drawdown         | -0.3086         | -0.2692         | -0.1890        
+2026-01-22 11:20:45 | INFO     | tearsheet:148 | Saved comparison analysis to tearsheet_sp500.png
