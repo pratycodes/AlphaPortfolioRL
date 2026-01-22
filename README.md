@@ -10,20 +10,6 @@ This framework is designed to solve the continuous control problem of asset allo
 
 ---
 
-## Table of Contents
-
-1. [Overview](https://www.google.com/search?q=%23overview)
-2. [Key Features](https://www.google.com/search?q=%23key-features)
-3. [System Architecture](https://www.google.com/search?q=%23system-architecture)
-4. [Installation](https://www.google.com/search?q=%23installation)
-5. [Configuration](https://www.google.com/search?q=%23configuration)
-6. [Usage](https://www.google.com/search?q=%23usage)
-7. [Results](https://www.google.com/search?q=%23results)
-8. [References](https://www.google.com/search?q=%23references)
-9. [Disclaimer](https://www.google.com/search?q=%23disclaimer)
-
----
-
 ## Overview
 
 Traditional portfolio optimization methods, such as Mean-Variance Optimization (MVO), often fail to capture the non-linear, stochastic nature of financial markets. AlphaPortfolioRL addresses this by modeling portfolio management as a Markov Decision Process (MDP).
