@@ -137,16 +137,15 @@ python main.py
 * **Output:** Checkpoints are saved in the `models/` directory (`best_actor.pth`, `best_ipm.pth`).
 * **Logs:** Training metrics are streamed to `logs/`.
 
-### 2. Evaluation (Tearsheet)
+### 2. Evaluation 
 
 To generate a professional performance report comparing the agent against the S&P 500 and an Equal-Weight Benchmark:
 
 ```bash
-python -m evaluation.tearsheet
-
+python -m evaluation.dashboard
 ```
 
-* **Output:** Generates `tearsheet_sp500.png` containing equity curves and asset allocation area plots.
+* **Output:** Generates `dashboard_sp500.png` containing equity curves and asset allocation area plots.
 
 ---
 
