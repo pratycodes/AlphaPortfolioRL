@@ -164,7 +164,7 @@ In out-of-sample testing (2025), the agent demonstrated significant alpha genera
 
 ## References
 
-This project is a direct implementation and extension of the research presented in:
+This project is an enhanced implementation and real-world extension of the research presented in:
 
 > **Yu, P., Lee, J. S., Kulyatin, I., Shi, Z., & Dasgupta, S. (2019). Model-based Deep Reinforcement Learning for Dynamic Portfolio Optimization.** *arXiv preprint arXiv:1901.08740.*
 > [https://doi.org/10.48550/arXiv.1901.08740](https://doi.org/10.48550/arXiv.1901.08740)
