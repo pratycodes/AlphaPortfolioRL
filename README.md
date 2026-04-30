@@ -57,6 +57,19 @@ The core decision-making unit.
 
 ---
 
+## Results
+
+In out-of-sample testing (2025), the agent demonstrated significant alpha generation capabilities:
+
+* **Total Return:** +34.53% (vs S&P 500: +16.34%)
+* **Sharpe Ratio:** 1.05
+* **Sortino Ratio:** 1.71
+* **Max Drawdown:** -30.86%
+
+![Backtest Results](assets/tearsheet_sp500.png)
+
+*Note: Past performance is not indicative of future results.*
+
 ## Installation
 
 ### Prerequisites
@@ -146,19 +159,6 @@ python -m evaluation.dashboard
 ```
 
 * **Output:** Generates `dashboard_sp500.png` containing equity curves and asset allocation area plots.
-
----
-
-## Results
-
-In out-of-sample testing (2025), the agent demonstrated significant alpha generation capabilities:
-
-* **Total Return:** +34.53% (vs S&P 500: +16.34%)
-* **Sharpe Ratio:** 1.05
-* **Sortino Ratio:** 1.71
-* **Max Drawdown:** -30.86%
-
-*Note: Past performance is not indicative of future results.*
 
 ---
 
