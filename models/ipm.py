@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from utils.logger import setup_logger
 import torch.optim as optim
 from config.settings import config
+from data.features import ohlc_feature_matrix
 
 logger = setup_logger()
 
@@ -31,16 +32,7 @@ class IPM(nn.Module):
         optimizer = optim.Adam(ipm.parameters(), lr=1e-3)
         criterion = nn.MSELoss()
 
-        try:
-            high = df.xs('High', level=1, axis=1).values
-            low = df.xs('Low', level=1, axis=1).values
-            close = df.xs('Close', level=1, axis=1).values
-        except KeyError:
-            high = df.xs('High', level=0, axis=1).values
-            low = df.xs('Low', level=0, axis=1).values
-            close = df.xs('Close', level=0, axis=1).values
-
-        obs_data = np.stack([high, low, close], axis=2).reshape(len(df), -1)
+        obs_data = ohlc_feature_matrix(df)
         
         X_list = []
         y_list = []
@@ -50,9 +42,9 @@ class IPM(nn.Module):
             window = obs_data[i : i + window_size]
             norm_window = window / (window[0] + 1e-8)
             
-            curr_close = close[i + window_size - 1]
-            next_close = close[i + window_size]
-            target_relative = next_close / (curr_close + 1e-8)
+            current_features = obs_data[i + window_size - 1]
+            next_features = obs_data[i + window_size]
+            target_relative = next_features / (current_features + 1e-8)
             
             X_list.append(norm_window)
             y_list.append(target_relative)
@@ -68,9 +60,7 @@ class IPM(nn.Module):
             for batch_X, batch_y in loader:
                 optimizer.zero_grad()
                 preds = ipm(batch_X) 
-                preds_reshaped = preds.view(-1, len(config.ASSETS), 3)
-                preds_close = preds_reshaped[:, :, 2]
-                loss = criterion(preds_close, batch_y)
+                loss = criterion(preds, batch_y)
                 loss.backward()
                 optimizer.step()
                 epoch_loss += loss.item()
