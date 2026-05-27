@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+
+from SparseNetwork4DRL import SparseLinear, build_mlp
+from config.settings import config
 
 class Actor(nn.Module):
     def __init__(self, num_assets, window_size, action_dim):
@@ -11,26 +13,27 @@ class Actor(nn.Module):
         
         input_dim_fa = 20 + action_dim + (num_assets * 3)
         
-        self.fa_net = nn.Sequential(
-            nn.Linear(input_dim_fa, 256),
-            nn.LeakyReLU(),
-            nn.Linear(256, 128),
-            nn.LeakyReLU(),
-            nn.Linear(128, 64),
-            nn.LeakyReLU(),
-            nn.Linear(64, action_dim) 
+        self.fa_net = build_mlp(
+            input_dim_fa,
+            [256, 128, 64],
+            action_dim,
+            use_sparse=getattr(config, "USE_SPARSE_NETWORK", False),
+            density=getattr(config, "SPARSE_DENSITY", 0.35),
+            seed=getattr(config, "SEED", None),
         )
         
         self.softmax = nn.Softmax(dim=1)
         self._init_weights()
 
     def _init_weights(self):
-        for m in self.fa_net:
-            if isinstance(m, nn.Linear):
+        linear_layers = []
+        for m in self.fa_net.modules():
+            if isinstance(m, (nn.Linear, SparseLinear)):
                 nn.init.xavier_uniform_(m.weight)
                 nn.init.constant_(m.bias, 0)
+                linear_layers.append(m)
         
-        last_layer = self.fa_net[-1]
+        last_layer = linear_layers[-1]
         last_layer.weight.data.uniform_(-3e-3, 3e-3)
         last_layer.bias.data.uniform_(-3e-3, 3e-3)
 
@@ -51,18 +54,19 @@ class Critic(nn.Module):
         
         input_dim_fa = 20 + action_dim + (num_assets * 3) + action_dim
         
-        self.fa_net = nn.Sequential(
-            nn.Linear(input_dim_fa, 256),
-            nn.LeakyReLU(),
-            nn.Linear(256, 128),
-            nn.LeakyReLU(),
-            nn.Linear(128, 1) 
+        self.fa_net = build_mlp(
+            input_dim_fa,
+            [256, 128],
+            1,
+            use_sparse=getattr(config, "USE_SPARSE_NETWORK", False),
+            density=getattr(config, "SPARSE_DENSITY", 0.35),
+            seed=getattr(config, "SEED", None) + 1000 if getattr(config, "SEED", None) is not None else None,
         )
         self._init_weights()
 
     def _init_weights(self):
-        for m in self.fa_net:
-            if isinstance(m, nn.Linear):
+        for m in self.fa_net.modules():
+            if isinstance(m, (nn.Linear, SparseLinear)):
                 nn.init.xavier_uniform_(m.weight)
                 nn.init.constant_(m.bias, 0)
                 
