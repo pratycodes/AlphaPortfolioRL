@@ -18,6 +18,12 @@ def make_config(assets=("AAA", "BBB"), max_weight=0.6):
         MARKET_IMPACT_BPS=0.0001,
         FIXED_COMMISSION=1.0,
         MAX_WEIGHT=max_weight,
+        MAX_CASH_WEIGHT=None,
+        REBALANCE_FREQ=1,
+        REWARD_MODE="rolling_sharpe",
+        RETURN_REWARD_SCALE=100.0,
+        TURNOVER_PENALTY=0.0,
+        CONCENTRATION_PENALTY=0.0,
         SHARPE_WINDOW=30,
     )
 
@@ -88,6 +94,51 @@ class PortfolioEnvTest(unittest.TestCase):
         self.assertIn("market_impact", info["cost_components"])
         self.assertIn("fixed_commission", info["cost_components"])
         self.assertAlmostEqual(info["cost_rate"], sum(info["cost_components"].values()))
+
+    def test_cash_cap_redistributes_excess_cash_to_assets(self):
+        config = make_config()
+        config.MAX_CASH_WEIGHT = 0.05
+        df = make_price_frame(np.full(8, 100.0), config.ASSETS)
+        env = PortfolioEnv(df, config)
+
+        weights = env._normalize_action(np.array([1.0, 0.0, 0.0]))
+
+        self.assertAlmostEqual(weights[0], 0.05)
+        self.assertAlmostEqual(weights.sum(), 1.0)
+        self.assertLessEqual(weights[1:].max(), config.MAX_WEIGHT + 1e-8)
+
+    def test_rebalance_frequency_holds_weights_between_rebalances(self):
+        config = make_config()
+        config.REBALANCE_FREQ = 5
+        config.FIXED_COMMISSION = 0.0
+        df = make_price_frame(np.full(12, 100.0), config.ASSETS)
+        env = PortfolioEnv(df, config)
+
+        _, _, _, _, first_info = env.step(np.array([0.0, 0.5, 0.5]))
+        _, _, _, _, second_info = env.step(np.array([1.0, 0.0, 0.0]))
+
+        self.assertTrue(first_info["rebalanced"])
+        self.assertFalse(second_info["rebalanced"])
+        np.testing.assert_allclose(second_info["executed_action"], first_info["weights"], atol=1e-8)
+        self.assertAlmostEqual(second_info["turnover"], 0.0)
+
+    def test_reward_penalizes_turnover_and_concentration(self):
+        config = make_config()
+        config.REWARD_MODE = "log_return"
+        config.TURNOVER_PENALTY = 1.0
+        config.CONCENTRATION_PENALTY = 1.0
+        config.TRADING_COST_BPS = 0.0
+        config.SLIPPAGE_BPS = 0.0
+        config.SPREAD_BPS = 0.0
+        config.MARKET_IMPACT_BPS = 0.0
+        config.FIXED_COMMISSION = 0.0
+        df = make_price_frame(np.full(8, 100.0), config.ASSETS)
+        env = PortfolioEnv(df, config)
+
+        _, reward, _, _, info = env.step(np.array([0.0, 1.0, 0.0]))
+
+        expected_penalty = info["turnover"] + info["concentration"]
+        self.assertAlmostEqual(reward, -expected_penalty, places=5)
 
 
 if __name__ == "__main__":

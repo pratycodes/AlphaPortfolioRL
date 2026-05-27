@@ -8,7 +8,9 @@ class ExperimentRunnerTest(unittest.TestCase):
     def test_ablation_matrix_contains_required_variants(self):
         self.assertIn("ddpg_only", ABLATION_OVERRIDES)
         self.assertEqual(ABLATION_OVERRIDES["ddpg_only"]["USE_IPM"], "false")
-        self.assertEqual(ABLATION_OVERRIDES["ddpg_ipm_bcm_dam"]["USE_DAM"], "true")
+        self.assertEqual(ABLATION_OVERRIDES["ddpg_only"]["USE_ARB"], "false")
+        self.assertEqual(ABLATION_OVERRIDES["ddpg_ipm_bcm_dam_arb_sparse"]["USE_DAM"], "true")
+        self.assertEqual(ABLATION_OVERRIDES["ddpg_ipm_bcm_dam_arb_sparse"]["USE_ARB"], "true")
 
     def test_walk_forward_splits_are_chronological(self):
         cfg = SimpleNamespace(

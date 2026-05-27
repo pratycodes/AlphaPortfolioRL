@@ -1,7 +1,9 @@
 import unittest
 from types import SimpleNamespace
 
-from utils.checkpoints import checkpoint_metadata, universe_id, validate_checkpoint_metadata
+import numpy as np
+
+from utils.checkpoints import _to_builtin, checkpoint_metadata, universe_id, validate_checkpoint_metadata
 
 
 def make_config(assets):
@@ -21,6 +23,17 @@ class CheckpointMetadataTest(unittest.TestCase):
         metadata = checkpoint_metadata(make_config(["AAPL", "MSFT"]))
         with self.assertRaises(RuntimeError):
             validate_checkpoint_metadata(metadata, make_config(["AAPL"]))
+
+    def test_metric_scalars_are_serialized_as_python_types(self):
+        metrics = {
+            "Sharpe Ratio": np.float64(1.25),
+            "Drawdowns": np.array([0.1, 0.2]),
+        }
+
+        converted = _to_builtin(metrics)
+
+        self.assertIsInstance(converted["Sharpe Ratio"], float)
+        self.assertEqual(converted["Drawdowns"], [0.1, 0.2])
 
 
 if __name__ == "__main__":
