@@ -1,0 +1,2 @@
+ablation,seed,rl_return,rl_sharpe,rl_max_drawdown,rl_final_value,rl_avg_turnover,rl_avg_cash,return_gap_vs_benchmark,return_gap_vs_crp,return_gap_vs_equal_weight,return_gap_vs_buy_hold_ew,sharpe_gap_vs_benchmark,sharpe_gap_vs_crp,sharpe_gap_vs_equal_weight,sharpe_gap_vs_buy_hold_ew
+champion_base,123,0.9648734960310716,2.278984193971677,-0.1700038657890712,982436.748015536,0.0122014446792217,0.0197278249484186,0.7061498232214776,0.4395333945800086,0.334222219062545,0.3139008753350816,1.212257254480478,0.3055282268338353,0.3054452193571524,0.3106079559559047

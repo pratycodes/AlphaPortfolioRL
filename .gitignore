@@ -16,7 +16,20 @@ __pycache__/
 .ipynb_checkpoints  
 
 .DS_Store
+.env
 runs/
+data_cache/
 saved_models/
+logs/
+/champion/
+assets/*.csv
+assets/*.png
+models/**/*.pt
+models/**/*.pth
 *.log
 *.pth
+
+!models/champion_arb_sparse_matrix/
+!models/champion_arb_sparse_matrix/360d0346fe/
+!models/champion_arb_sparse_matrix/360d0346fe/best.pt
+!models/champion_arb_sparse_matrix/360d0346fe/dam_generator.pth

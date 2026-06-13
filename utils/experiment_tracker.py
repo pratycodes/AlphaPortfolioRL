@@ -37,6 +37,13 @@ class ExperimentTracker:
         with self.metrics_path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(record, default=_json_default, sort_keys=True) + "\n")
 
+    def log_table(self, name, step, frame):
+        table_dir = self.run_dir / "tables"
+        table_dir.mkdir(parents=True, exist_ok=True)
+        path = table_dir / f"{name}_{step:03d}.csv"
+        frame.to_csv(path, index=False)
+        return path
+
     def _write_json(self, path, payload):
         with path.open("w", encoding="utf-8") as handle:
             json.dump(payload, handle, default=_json_default, indent=2, sort_keys=True)

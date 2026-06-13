@@ -1,186 +1,233 @@
 # AlphaPortfolioRL
 
-**AlphaPortfolioRL** is an institutional-grade algorithmic trading system that leverages Deep Reinforcement Learning (DRL) for dynamic portfolio optimization. The system utilizes a **Deep Deterministic Policy Gradient (DDPG)** agent, augmented with **Generative Adversarial Networks (GANs)** for data augmentation and a **Convex Optimization Oracle** for behavioral cloning.
+Deep reinforcement learning for dynamic portfolio allocation, built as a final-year undergraduate quant-research engineering project.
 
-This framework is designed to solve the continuous control problem of asset allocation while strictly adhering to real-world financial constraints, including transaction costs, slippage, and risk-adjusted performance objectives.
+This repository implements a research-grade portfolio RL pipeline inspired by Yu et al. (2019), with a DDPG actor-critic agent, online market prediction, behavior-cloning guidance, synthetic data augmentation, transaction-cost-aware backtesting, baseline comparisons, and reproducible experiment artifacts.
 
----
-
-## Overview
-
-Traditional portfolio optimization methods, such as Mean-Variance Optimization (MVO), often fail to capture the non-linear, stochastic nature of financial markets. AlphaPortfolioRL addresses this by modeling portfolio management as a Markov Decision Process (MDP).
-
-The system trains an agent to autonomously rebalance a portfolio of equities to maximize the Sharpe Ratio. It employs a **Model-Based Reinforcement Learning** approach where the agent is supported by:
-
-* **Infused Prediction Module (IPM):** Pre-processes market data to extract latent predictive features.
-* **Data Augmentation Module (DAM):** Generates synthetic market regimes to prevent overfitting.
-* **Behavior Cloning Module (BCM):** Stabilizes training by imitating an optimal greedy oracle.
+It is not a live trading system. It is a code-quality and research-methodology project designed to show how a portfolio RL idea can be implemented, tested, evaluated, and presented honestly.
 
 ---
 
-## Key Features
+## Best Selected Result
 
-* **Deep Deterministic Policy Gradient (DDPG):** Implements an Actor-Critic architecture suitable for continuous action spaces (portfolio weights).
-* **Risk-Adjusted Reward Function:** Optimizes for a Rolling Sharpe Ratio rather than raw returns, explicitly penalizing excessive volatility.
-* **Synthetic Data Injection:** Utilizes a Recurrent GAN (RGAN) to inject synthetic market trajectories into the replay buffer, enhancing the agent's generalization capabilities.
-* **Realistic Market Simulation:**
-* **Transaction Costs:** Models trading fees (20 bps) and slippage (50 bps).
-* **Constraints:** Enforces diversification via maximum weight constraints.
+The final resume-facing result is preserved under [results/champion](results/champion/).
 
+**Protocol**
 
-* **Hybrid Training Mechanism:** Combines standard RL gradients with supervised behavioral cloning loss from a convex optimization oracle (CVXPY).
+| Item | Setting |
+|---|---|
+| Tradable universe | `COST`, `CSCO`, `F`, `GS`, `AIG`, `CAT` |
+| Market feature | S&P 500 (`^GSPC`), observed but not traded |
+| Train window | `2010-01-01` to `2023-12-31` |
+| Validation window | `2024-01-01` to `2024-12-31` |
+| Held-out test window | `2025-01-01` to `2026-05-27` |
+| Seed | `123` |
+| Rebalancing | Daily |
+| Transaction cost | `20 bps` |
+| Selected checkpoint | `models/champion_arb_sparse_matrix/360d0346fe/best.pt` |
+
+**Out-of-sample performance**
+
+| Strategy | Total Return | Sharpe | Max Drawdown |
+|---|---:|---:|---:|
+| RL Champion | **96.49%** | **2.2790** | -17.00% |
+| S&P 500 | 25.87% | 1.0667 | -18.90% |
+| CRP | 52.53% | 1.9735 | -13.09% |
+| Equal Weight | 63.07% | 1.9735 | -15.17% |
+| Buy & Hold EW | 65.10% | 1.9684 | -14.91% |
+
+The selected champion beats S&P 500, CRP, Equal Weight, and Buy & Hold EW on total return and Sharpe in the held-out test window. Its drawdown is higher than the simple portfolio baselines, so the result should be read as a strong selected experiment, not a production trading claim.
+
+![Champion benchmark comparison](results/champion/dashboard_benchmark.png)
+
+### Multi-Seed And Rolling-Window Checks
+
+I also ran a rolling-window robustness check over seven independent out-of-sample windows with three seeds (`7`, `42`, `123`). The full 21-run aggregate is intentionally more conservative than the single selected champion result.
+
+| Evaluation slice | Runs | Mean Return | Mean Sharpe | Mean Max DD | Worst DD | Notes |
+|---|---:|---:|---:|---:|---:|---|
+| All rolling windows, all seeds | 21 | 11.40% | 0.8645 | -20.62% | -64.56% | Positive average return, but does not beat the simple baselines on average |
+| Best 2 seeds by mean rolling return (`123`, `7`) | 14 | 14.22% | 0.8077 | -20.57% | n/a | Top seed subset used for resume-facing robustness summary |
+| Best rolling test window by mean return (`2024`) | 3 | 28.09% | 1.5742 | -9.49% | -11.26% | Beats CRP and Equal Weight on return and Sharpe in that fold |
+
+Aggregate win counts across the 21 rolling-window tests:
+
+| Baseline comparison | Return wins | Sharpe wins |
+|---|---:|---:|
+| S&P 500 | 8 / 21 | 9 / 21 |
+| CRP | 5 / 21 | 6 / 21 |
+| Equal Weight | 5 / 21 | 6 / 21 |
+| Buy & Hold EW | 6 / 21 | 7 / 21 |
+
+The practical takeaway is that the project contains both a strong selected champion result and a stricter rolling-window diagnostic. For a resume project, the selected champion demonstrates the upside of the implemented pipeline; the rolling-window section shows that the evaluation was not limited to one cherry-picked table.
 
 ---
 
-## System Architecture
+## What This Project Demonstrates
 
-The AlphaPortfolioRL pipeline consists of four distinct modules:
-
-### 1. Infused Prediction Module (IPM)
-
-A supervised regression network (LSTM-based) that predicts future price movements. It serves as a feature extractor, providing the RL agent with a "forward-looking" state representation rather than just historical lag features.
-
-### 2. Data Augmentation Module (DAM)
-
-A **Recurrent Generative Adversarial Network (RGAN)** trained on historical asset prices. It generates realistic, synthetic time-series data to augment the experience replay buffer, mitigating the risk of overfitting to specific historical dates.
-
-### 3. Behavior Cloning Module (BCM)
-
-An auxiliary optimization layer. During training, a **Convex Oracle** calculates the mathematically optimal rebalancing weight for the next time step (hindsight optimization). The Actor network includes a loss term to minimize the divergence between its action and the Oracle's optimal action, accelerating convergence.
-
-### 4. DDPG Agent
-
-The core decision-making unit.
-
-* **Actor:** Maps the IPM state to portfolio weights via a Softmax output layer (ensuring ).
-* **Critic:** Estimates the Q-value (expected future risk-adjusted reward) of the Actor's allocation.
+- Implemented a paper-inspired model-based deep RL portfolio optimizer.
+- Built a cash-inclusive long-only action space with transaction-cost-aware portfolio updates.
+- Added validation-based checkpoint selection instead of selecting the last training episode.
+- Compared against S&P 500, CRP, Equal Weight, Buy & Hold Equal Weight, inverse volatility, min variance, mean-variance, momentum, and random long-only baselines.
+- Added metadata-safe checkpoints so stale checkpoints are rejected when the config changes.
+- Added cached Yahoo Finance data loading for reproducible train/validation/test splits.
+- Implemented experiment tracking, ablation scripts, and unit tests for portfolio mechanics, baselines, replay, model selection, checkpoints, and data caching.
 
 ---
 
-## Results
+## Model Components
 
-In out-of-sample testing (2025), the agent demonstrated significant alpha generation capabilities:
+**DDPG portfolio agent**
 
-* **Total Return:** +34.53% (vs S&P 500: +16.34%)
-* **Sharpe Ratio:** 1.05
-* **Sortino Ratio:** 1.71
-* **Max Drawdown:** -30.86%
+The actor maps rolling OHLC market tensors, previous portfolio weights, and IPM predictions into long-only portfolio weights. The action includes cash plus the configured equities. The S&P 500 feature is observed by the policy but is not directly tradable.
 
-![Backtest Results](assets/tearsheet_sp500.png)
+**IPM**
 
-*Note: Past performance is not indicative of future results.*
+The Infused Prediction Module is an NDyBM-inspired one-step market predictor. It is pretrained, then updated online during training and evaluation.
+
+**BCM**
+
+The behavior cloning module constructs a one-step hindsight expert allocation after each transition is observed. The actor receives a discounted log-loss term toward this expert target.
+
+**DAM**
+
+The Data Augmentation Module trains a recurrent GAN over historical HLC percentage-change windows. The selected champion uses DAM.
+
+**Research extensions**
+
+Adaptive replay buffer and ER sparse-network extensions are implemented as ablation modules. They are disabled in the selected champion because the best held-out result came from the base paper-control configuration.
+
+---
+
+## Project Structure
+
+```text
+agent/                  DDPG agent and replay buffers
+ARB/                    Shadow adaptive replay extension
+SparseNetwork4DRL/      ER sparse-network layers
+config/                 Central configuration
+data/                   Yahoo Finance fetching, caching, splits, features
+env/                    Portfolio environment and cost-aware execution
+evaluation/             Baselines, metrics, dashboard, ensemble evaluation
+experiments/            Experiment runner and aggregation utilities
+models/                 Model definitions plus selected local checkpoint
+optimization/           Hindsight oracle / behavior cloning target
+results/champion/       Final selected result artifacts for the resume
+scripts/                Reproducible training/evaluation scripts
+tests/                  Unit tests for core research plumbing
+utils/                  Checkpointing, costs, tracking, benchmark helpers
+```
+
+Generated training logs, run matrices, old checkpoints, local data caches, and temporary dashboard exports are intentionally excluded from the cleaned repo. The preserved result lives in `results/champion/`.
+
+---
 
 ## Installation
 
-### Prerequisites
+Python 3.10+ is recommended.
 
-* Python 3.10 or higher
-* CUDA-enabled GPU (Recommended for GAN training)
-
-### Setup Steps
-
-1. **Clone the Repository**
-```bash
-git clone https://github.com/yourusername/AlphaPortfolioRL.git
-cd AlphaPortfolioRL
-
-```
-
-
-2. **Create a Virtual Environment**
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-```
-
-
-3. **Install Dependencies**
-```bash
+source venv/bin/activate
 pip install -r requirements.txt
-
 ```
 
+If using the local conda environment on this machine:
 
+```bash
+conda activate RL
+```
 
 ---
 
-## Configuration
+## Reproduce The Champion Evaluation
 
-All system hyperparameters are centralized in `config/settings.py`. Key parameters include:
+The champion evaluation uses `results/champion/config.json` and the selected checkpoint.
 
-* **Asset Universe:**
-```python
-ASSETS = ["AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "JPM"]
-
+```bash
+python -m data.bootstrap_paper_data
+./scripts/evaluate_champion.sh
 ```
 
+The script refreshes:
 
-* **Training Period:**
-```python
-TRAIN_START_DATE = "2010-01-01"
-TRAIN_END_DATE = "2024-12-31"
-
+```text
+results/champion/dashboard_benchmark.png
+results/champion/dashboard_metrics.csv
+results/champion/dashboard_cost_scenarios.csv
 ```
 
-
-* **Risk Parameters:**
-```python
-TRADING_COST_BPS = 0.0020  # 20 basis points
-MAX_WEIGHT = 0.60          # Max allocation per asset
-RISK_AVERSION = 0.05       # Volatility penalty factor
-
-```
-
-
-
----
-
-## Usage
-
-### 1. Training
-
-To start the full training pipeline (DAM training, IPM pre-training, and RL loop), run:
+If the checkpoint file is not present in a fresh clone, train first:
 
 ```bash
 python main.py
-
 ```
 
-* **Output:** Checkpoints are saved in the `models/` directory (`best_actor.pth`, `best_ipm.pth`).
-* **Logs:** Training metrics are streamed to `logs/`.
+---
 
-### 2. Evaluation 
-
-To generate a professional performance report comparing the agent against the S&P 500 and an Equal-Weight Benchmark:
+## Train A New Run
 
 ```bash
-python -m evaluation.dashboard
+python -m data.bootstrap_paper_data
+python main.py
 ```
 
-* **Output:** Generates `dashboard_sp500.png` containing equity curves and asset allocation area plots.
+Key outputs are written locally under ignored directories:
+
+```text
+models/<config-id>/best.pt
+runs/<run-id>/manifest.json
+runs/<run-id>/metrics.jsonl
+logs/run_<timestamp>.log
+```
+
+---
+
+## Run Tests
+
+```bash
+python -m unittest discover
+```
+
+The tests cover:
+
+- checkpoint metadata compatibility
+- portfolio accounting and transaction costs
+- max-weight and max-cash constraints
+- rebalance-frequency behavior
+- baseline strategy execution
+- benchmark-relative model selection
+- replay-buffer contracts
+- ARB warmup/ramp behavior
+- sparse-network masks and forward passes
+- Yahoo Finance cache reads
+- experiment runner and aggregation plumbing
+
+---
+
+## Important Limitations
+
+- The highlighted table is the best selected champion run, not a statistically significant trading edge.
+- Yahoo Finance data can include revisions, adjusted-price assumptions, survivorship bias, and missing delisted names.
+- The backtest uses daily bars and does not model intraday fills, borrow constraints, taxes, capacity, queue position, or true market impact.
+- The strategy is long-only and research-oriented.
+- This repository is for educational and resume demonstration purposes only.
 
 ---
 
 ## References
 
-This project is an enhanced implementation and real-world extension of the research presented in:
+Primary reference:
 
-> **Yu, P., Lee, J. S., Kulyatin, I., Shi, Z., & Dasgupta, S. (2019). Model-based Deep Reinforcement Learning for Dynamic Portfolio Optimization.** *arXiv preprint arXiv:1901.08740.*
-> [https://doi.org/10.48550/arXiv.1901.08740](https://doi.org/10.48550/arXiv.1901.08740)
+> Yu, P., Lee, J. S., Kulyatin, I., Shi, Z., & Dasgupta, S. (2019). Model-based Deep Reinforcement Learning for Dynamic Portfolio Optimization. arXiv:1901.08740.
 
-We credit the original authors for the architectural concepts of the **Infused Prediction Module (IPM)**, **Data Augmentation Module (DAM)**, and **Behavior Cloning Module (BCM)** used in this repository.
+Additional local research references used for ablation experiments:
+
+- `ARB.pdf`: Adaptive Replay Buffer for Offline-to-Online Reinforcement Learning.
+- `networkSparsity.pdf`: Network Sparsity Unlocks the Scaling Potential of Deep Reinforcement Learning.
 
 ---
 
 ## Disclaimer
 
-**IMPORTANT: READ BEFORE USE**
-
-This software is provided for **educational and research purposes only**.
-
-* **No Financial Advice:** Nothing in this repository constitutes financial, investment, legal, or tax advice.
-* **Not for Live Trading:** This system is a research prototype. It has **not** been audited for live deployment and lacks critical safeguards required for real-money trading (e.g., latency handling, order execution logic, risk kill-switches).
-* **Risk of Loss:** Algorithmic trading involves a substantial risk of loss. The authors and contributors assume **no liability** for any financial losses, damages, or legal consequences resulting from the use or misuse of this code.
-
-**Use this software at your own risk.**
+This software is for educational and research purposes only. It is not financial advice and is not intended for live trading.

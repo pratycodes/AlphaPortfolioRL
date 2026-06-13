@@ -1,0 +1,40 @@
+{
+  "ablation_summary": "results/champion/ablation_summary.csv",
+  "assets": [
+    "COST",
+    "CSCO",
+    "F",
+    "GS",
+    "AIG",
+    "CAT"
+  ],
+  "benchmark": "^GSPC",
+  "champion": "champion_base",
+  "checkpoint_exists": true,
+  "checkpoint_hash": "360d0346fe",
+  "checkpoint_path": "models/champion_arb_sparse_matrix/360d0346fe/best.pt",
+    "final_oos_comparison": "results/champion/final_oos_comparison.csv",
+    "market_feature": "^GSPC",
+    "rolling_multiseed_summary": "results/champion/rolling_multiseed_summary.csv",
+    "rolling_seed_summary": "results/champion/rolling_seed_summary.csv",
+    "selection_hurdles": [
+        "CRP",
+        "Equal Weight",
+    "Buy & Hold EW"
+  ],
+  "source_run": "runs/champion_arb_sparse_matrix_runs/run_20260609_144326_seed_123",
+  "test_summary": "results/champion/test_summary.csv",
+  "test_window": [
+    "2025-01-01",
+    "2026-05-27"
+  ],
+  "train_window": [
+    "2010-01-01",
+    "2023-12-31"
+  ],
+  "validation_summary": "results/champion/validation_summary.csv",
+  "validation_window": [
+    "2024-01-01",
+    "2024-12-31"
+  ]
+}

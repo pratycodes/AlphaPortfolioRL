@@ -1,0 +1,4 @@
+seed,folds,mean_return,mean_sharpe,mean_max_drawdown,return_gap_vs_crp,sharpe_gap_vs_crp,return_gap_vs_equal_weight,sharpe_gap_vs_equal_weight,seed_rank_by_mean_return
+123,7,0.161576,0.783838,-0.215969,-0.042094,-0.378236,-0.078243,-0.378276,1
+7,7,0.122855,0.831542,-0.195442,-0.080815,-0.330532,-0.116964,-0.330573,2
+42,7,0.057638,0.978260,-0.207194,-0.146032,-0.183814,-0.182181,-0.183855,3

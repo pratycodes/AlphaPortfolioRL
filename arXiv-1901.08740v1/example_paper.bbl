@@ -1,0 +1,352 @@
+\begin{thebibliography}{52}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abbeel \& Ng(2004)Abbeel and Ng]{abbeel2004apprenticeship}
+Abbeel, P. and Ng, A.~Y.
+\newblock Apprenticeship learning via inverse reinforcement learning.
+\newblock In \emph{Proceedings of the twenty-first international conference on
+  Machine learning}, pp.\ ~1. ACM, 2004.
+
+\bibitem[Arjovsky \& Bottou(2017)Arjovsky and Bottou]{arjovsky2017towards}
+Arjovsky, M. and Bottou, L.
+\newblock Towards principled methods for training generative adversarial
+  networks.
+\newblock \emph{arXiv preprint arXiv:1701.04862}, 2017.
+
+\bibitem[Arjovsky et~al.(2017)Arjovsky, Chintala, and Bottou]{arjovsky17a}
+Arjovsky, M., Chintala, S., and Bottou, L.
+\newblock {W}asserstein generative adversarial networks.
+\newblock In Precup, D. and Teh, Y.~W. (eds.), \emph{Proceedings of the 34th
+  International Conference on Machine Learning}, volume~70 of \emph{Proceedings
+  of Machine Learning Research}, pp.\  214--223, International Convention
+  Centre, Sydney, Australia, 06--11 Aug 2017. PMLR.
+\newblock URL \url{http://proceedings.mlr.press/v70/arjovsky17a.html}.
+
+\bibitem[Artzner et~al.(1999)Artzner, Delbaen, Eber, and
+  Heath]{artzner1999coherent}
+Artzner, P., Delbaen, F., Eber, J.-M., and Heath, D.
+\newblock Coherent measures of risk.
+\newblock \emph{Mathematical finance}, 9\penalty0 (3):\penalty0 203--228, 1999.
+
+\bibitem[Bain \& Sommut(1999)Bain and Sommut]{bain1999framework}
+Bain, M. and Sommut, C.
+\newblock A framework for behavioural cloning.
+\newblock \emph{Machine intelligence}, 15\penalty0 (15):\penalty0 103, 1999.
+
+\bibitem[Bertsekas(2005)]{bertsekas2005dynamic}
+Bertsekas, D.~P.
+\newblock \emph{Dynamic programming and optimal control}, volume~1.
+\newblock Athena scientific Belmont, MA, 2005.
+
+\bibitem[Bhatnagar et~al.(2009)Bhatnagar, Sutton, Ghavamzadeh, and
+  Lee]{bhatnagar2009natural}
+Bhatnagar, S., Sutton, R.~S., Ghavamzadeh, M., and Lee, M.
+\newblock Natural actor--critic algorithms.
+\newblock \emph{Automatica}, 45\penalty0 (11):\penalty0 2471--2482, 2009.
+
+\bibitem[Borovykh et~al.(2017)Borovykh, Bohte, and
+  Oosterlee]{borovykh2017conditional}
+Borovykh, A., Bohte, S., and Oosterlee, C.~W.
+\newblock Conditional time series forecasting with convolutional neural
+  networks.
+\newblock \emph{arXiv preprint arXiv:1703.04691}, 2017.
+
+\bibitem[Chekhlov et~al.(2005)Chekhlov, Uryasev, and
+  Zabarankin]{chekhlov2005drawdown}
+Chekhlov, A., Uryasev, S., and Zabarankin, M.
+\newblock Drawdown measure in portfolio optimization.
+\newblock \emph{International Journal of Theoretical and Applied Finance},
+  8\penalty0 (01):\penalty0 13--58, 2005.
+
+\bibitem[Cover(1991)]{cover91}
+Cover, T.~M.
+\newblock {Universal portfolios}.
+\newblock \emph{Mathematical finance}, 1\penalty0 (1):\penalty0 1--29, 1991.
+
+\bibitem[Cumming et~al.(2015)Cumming, Alrajeh, and
+  Dickens]{cumming2015investigation}
+Cumming, J., Alrajeh, D.~D., and Dickens, L.
+\newblock \emph{An investigation into the use of reinforcement learning
+  techniques within the algorithmic trading domain}.
+\newblock PhD thesis, 2015.
+
+\bibitem[Dasgupta \& Osogami(2017)Dasgupta and Osogami]{dasgupta2017nonlinear}
+Dasgupta, S. and Osogami, T.
+\newblock Nonlinear dynamic boltzmann machines for time-series prediction.
+\newblock In \emph{AAAI}, pp.\  1833--1839, 2017.
+
+\bibitem[Daum{\'e} et~al.(2009)Daum{\'e}, Langford, and Marcu]{daume2009search}
+Daum{\'e}, H., Langford, J., and Marcu, D.
+\newblock Search-based structured prediction.
+\newblock \emph{Machine learning}, 75\penalty0 (3):\penalty0 297--325, 2009.
+
+\bibitem[Dempster \& Leemans(2006)Dempster and Leemans]{dempster2006automated}
+Dempster, M.~A. and Leemans, V.
+\newblock An automated {FX} trading system using adaptive reinforcement
+  learning.
+\newblock \emph{Expert Systems with Applications}, 30\penalty0 (3):\penalty0
+  543--552, 2006.
+
+\bibitem[Deng et~al.(2017)Deng, Bao, Kong, Ren, and Dai]{deng2017deep}
+Deng, Y., Bao, F., Kong, Y., Ren, Z., and Dai, Q.
+\newblock Deep direct reinforcement learning for financial signal
+  representation and trading.
+\newblock \emph{IEEE transactions on neural networks and learning systems},
+  28\penalty0 (3):\penalty0 653--664, 2017.
+
+\bibitem[Esteban et~al.(2017)Esteban, Hyland, and R{\"a}tsch]{esteban2017real}
+Esteban, C., Hyland, S.~L., and R{\"a}tsch, G.
+\newblock Real-valued (medical) time series generation with recurrent
+  conditional {GAN}s.
+\newblock \emph{arXiv preprint arXiv:1706.02633}, 2017.
+
+\bibitem[Feng et~al.(2015)Feng, Palomar, and Rubio]{6998078}
+Feng, Y., Palomar, D.~P., and Rubio, F.
+\newblock Robust optimization of order execution.
+\newblock \emph{IEEE Transactions on Signal Processing}, 63\penalty0
+  (4):\penalty0 907--920, Feb 2015.
+\newblock ISSN 1053-587X.
+\newblock \doi{10.1109/TSP.2014.2386288}.
+
+\bibitem[Goodfellow et~al.(2014)Goodfellow, Pouget-Abadie, Mirza, Xu,
+  Warde-Farley, Ozair, Courville, and Bengio]{goodfellow2014generative}
+Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair,
+  S., Courville, A., and Bengio, Y.
+\newblock Generative adversarial nets.
+\newblock In \emph{Advances in neural information processing systems}, pp.\
+  2672--2680, 2014.
+
+\bibitem[Gretton et~al.(2012)Gretton, Arthur, Borgwardt, M., Rasch, Malte,
+  Schölkopf, Bernhard, and Alexander]{gretton2012}
+Gretton, Arthur, Borgwardt, M., K., Rasch, Malte, Schölkopf, Bernhard, and
+  Alexander.
+\newblock A kernel two-sample test, Dec 2012.
+\newblock URL \url{http://jmlr.csail.mit.edu/papers/v13/gretton12a.html}.
+
+\bibitem[Gretton et~al.(2007)Gretton, Borgwardt, Rasch, Sch{\"o}lkopf, and
+  Smola]{gretton2007kernel}
+Gretton, A., Borgwardt, K.~M., Rasch, M., Sch{\"o}lkopf, B., and Smola, A.~J.
+\newblock A kernel method for the two-sample-problem.
+\newblock In \emph{Advances in neural information processing systems}, pp.\
+  513--520, 2007.
+
+\bibitem[Guo et~al.(2018)Guo, Fu, Shi, and Liu]{guo2018robust}
+Guo, Y., Fu, X., Shi, Y., and Liu, M.
+\newblock Robust log-optimal strategy with reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:1805.00205}, 2018.
+
+\bibitem[Haugen \& Haugen(1990)Haugen and Haugen]{haugen1990modern}
+Haugen, R.~A. and Haugen, R.~A.
+\newblock Modern investment theory.
+\newblock 1990.
+
+\bibitem[Heess et~al.(2015)Heess, Hunt, Lillicrap, and Silver]{heess2015memory}
+Heess, N., Hunt, J.~J., Lillicrap, T.~P., and Silver, D.
+\newblock Memory-based control with recurrent neural networks.
+\newblock \emph{arXiv preprint arXiv:1512.04455}, 2015.
+
+\bibitem[Hochreiter \& Schmidhuber(1997)Hochreiter and
+  Schmidhuber]{hochreiter1997long}
+Hochreiter, S. and Schmidhuber, J.
+\newblock Long short-term memory.
+\newblock \emph{Neural computation}, 9\penalty0 (8):\penalty0 1735--1780, 1997.
+
+\bibitem[Jaeger(2003)]{jaeger2003adaptive}
+Jaeger, H.
+\newblock Adaptive nonlinear system identification with echo state networks.
+\newblock In \emph{Advances in neural information processing systems}, pp.\
+  609--616, 2003.
+
+\bibitem[Jaeger \& Haas(2004)Jaeger and Haas]{jaeger2004harnessing}
+Jaeger, H. and Haas, H.
+\newblock Harnessing nonlinearity: Predicting chaotic systems and saving energy
+  in wireless communication.
+\newblock \emph{science}, 304\penalty0 (5667):\penalty0 78--80, 2004.
+
+\bibitem[Jiang et~al.(2017)Jiang, Xu, and Liang]{jiang2017deep}
+Jiang, Z., Xu, D., and Liang, J.
+\newblock A deep reinforcement learning framework for the financial portfolio
+  management problem.
+\newblock \emph{arXiv preprint arXiv:1706.10059}, 2017.
+
+\bibitem[Krizhevsky et~al.(2012)Krizhevsky, Sutskever, and
+  Hinton]{krizhevsky2012imagenet}
+Krizhevsky, A., Sutskever, I., and Hinton, G.~E.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In \emph{Advances in neural information processing systems}, pp.\
+  1097--1105, 2012.
+
+\bibitem[Li \& Hoi(2014)Li and Hoi]{li2014online}
+Li, B. and Hoi, S.~C.
+\newblock Online portfolio selection: A survey.
+\newblock \emph{ACM Computing Surveys (CSUR)}, 46\penalty0 (3):\penalty0 35,
+  2014.
+
+\bibitem[Li et~al.(2015)Li, Swersky, and Zemel]{yujia2015gmmn}
+Li, Y., Swersky, K., and Zemel, R.
+\newblock Generative moment matching networks.
+\newblock In Bach, F. and Blei, D. (eds.), \emph{Proceedings of the 32nd
+  International Conference on Machine Learning}, volume~37 of \emph{Proceedings
+  of Machine Learning Research}, pp.\  1718--1727, Lille, France, 07--09 Jul
+  2015. PMLR.
+\newblock URL \url{http://proceedings.mlr.press/v37/li15.html}.
+
+\bibitem[Liang et~al.(2018)Liang, Chen, Zhu, Jiang, and
+  Li]{liang2018adversarial}
+Liang, Z., Chen, H., Zhu, J., Jiang, K., and Li, Y.
+\newblock Adversarial deep reinforcement learning in portfolio management.
+\newblock \emph{arXiv preprint arXiv:1808.09940}, 2018.
+
+\bibitem[Lillicrap et~al.(2015)Lillicrap, Hunt, Pritzel, Heess, Erez, Tassa,
+  Silver, and Wierstra]{lillicrap2015continuous}
+Lillicrap, T.~P., Hunt, J.~J., Pritzel, A., Heess, N., Erez, T., Tassa, Y.,
+  Silver, D., and Wierstra, D.
+\newblock Continuous control with deep reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:1509.02971}, 2015.
+
+\bibitem[Marinescu et~al.(2017)Marinescu, Dusparic, and
+  Clarke]{marinescu2017prediction}
+Marinescu, A., Dusparic, I., and Clarke, S.
+\newblock Prediction-based multi-agent reinforcement learning in inherently
+  non-stationary environments.
+\newblock \emph{ACM Transactions on Autonomous and Adaptive Systems (TAAS)},
+  12\penalty0 (2):\penalty0 9, 2017.
+
+\bibitem[Markowitz(1959)]{markowitz1959portfolio}
+Markowitz, H.~M.
+\newblock Portfolio selection: Efficient diversification of investment. 344 p,
+  1959.
+
+\bibitem[Mittelman(2015)]{mittelman2015time}
+Mittelman, R.
+\newblock Time-series modeling with undecimated fully convolutional neural
+  networks.
+\newblock \emph{arXiv preprint arXiv:1508.00317}, 2015.
+
+\bibitem[Mnih et~al.(2015)Mnih, Kavukcuoglu, Silver, Rusu, Veness, Bellemare,
+  Graves, Riedmiller, Fidjeland, Ostrovski, et~al.]{mnih2015human}
+Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A.~A., Veness, J., Bellemare,
+  M.~G., Graves, A., Riedmiller, M., Fidjeland, A.~K., Ostrovski, G., et~al.
+\newblock Human-level control through deep reinforcement learning.
+\newblock \emph{Nature}, 518\penalty0 (7540):\penalty0 529, 2015.
+
+\bibitem[Mnih et~al.(2016)Mnih, Badia, Mirza, Graves, Lillicrap, Harley,
+  Silver, and Kavukcuoglu]{mnih2016asynchronous}
+Mnih, V., Badia, A.~P., Mirza, M., Graves, A., Lillicrap, T., Harley, T.,
+  Silver, D., and Kavukcuoglu, K.
+\newblock Asynchronous methods for deep reinforcement learning.
+\newblock In \emph{International conference on machine learning}, pp.\
+  1928--1937, 2016.
+
+\bibitem[Moody \& Saffell(2001)Moody and Saffell]{moody2001learning}
+Moody, J. and Saffell, M.
+\newblock Learning to trade via direct reinforcement.
+\newblock \emph{IEEE transactions on neural networks}, 12\penalty0
+  (4):\penalty0 875--889, 2001.
+
+\bibitem[Nair et~al.(2018)Nair, McGrew, Andrychowicz, Zaremba, and
+  Abbeel]{nair2018overcoming}
+Nair, A., McGrew, B., Andrychowicz, M., Zaremba, W., and Abbeel, P.
+\newblock Overcoming exploration in reinforcement learning with demonstrations.
+\newblock In \emph{2018 IEEE International Conference on Robotics and
+  Automation (ICRA)}, pp.\  6292--6299. IEEE, 2018.
+
+\bibitem[Oh et~al.(2015)Oh, Guo, Lee, Lewis, and Singh]{oh2015action}
+Oh, J., Guo, X., Lee, H., Lewis, R.~L., and Singh, S.
+\newblock Action-conditional video prediction using deep networks in atari
+  games.
+\newblock In \emph{Advances in neural information processing systems}, pp.\
+  2863--2871, 2015.
+
+\bibitem[Plappert et~al.(2017)Plappert, Houthooft, Dhariwal, Sidor, Chen, Chen,
+  Asfour, Abbeel, and Andrychowicz]{plappert2017parameter}
+Plappert, M., Houthooft, R., Dhariwal, P., Sidor, S., Chen, R.~Y., Chen, X.,
+  Asfour, T., Abbeel, P., and Andrychowicz, M.
+\newblock Parameter space noise for exploration.
+\newblock \emph{arXiv preprint arXiv:1706.01905}, 2017.
+
+\bibitem[Rockafellar et~al.(2000)Rockafellar, Uryasev,
+  et~al.]{rockafellar2000optimization}
+Rockafellar, R.~T., Uryasev, S., et~al.
+\newblock Optimization of conditional value-at-risk.
+\newblock \emph{Journal of risk}, 2:\penalty0 21--42, 2000.
+
+\bibitem[Ross et~al.(2011)Ross, Gordon, and Bagnell]{ross2011reduction}
+Ross, S., Gordon, G., and Bagnell, D.
+\newblock A reduction of imitation learning and structured prediction to
+  no-regret online learning.
+\newblock In \emph{Proceedings of the fourteenth international conference on
+  artificial intelligence and statistics}, pp.\  627--635, 2011.
+
+\bibitem[Schaul et~al.(2015)Schaul, Quan, Antonoglou, and
+  Silver]{schaul2015prioritized}
+Schaul, T., Quan, J., Antonoglou, I., and Silver, D.
+\newblock Prioritized experience replay.
+\newblock \emph{arXiv preprint arXiv:1511.05952}, 2015.
+
+\bibitem[Schulman et~al.(2015)Schulman, Levine, Abbeel, Jordan, and
+  Moritz]{schulman2015trust}
+Schulman, J., Levine, S., Abbeel, P., Jordan, M., and Moritz, P.
+\newblock Trust region policy optimization.
+\newblock In \emph{International Conference on Machine Learning}, pp.\
+  1889--1897, 2015.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{schulman2017proximal}
+Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O.
+\newblock Proximal policy optimization algorithms.
+\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
+
+\bibitem[Sharpe(1966)]{sharpe1966mutual}
+Sharpe, W.~F.
+\newblock Mutual fund performance.
+\newblock \emph{The Journal of business}, 39\penalty0 (1):\penalty0 119--138,
+  1966.
+
+\bibitem[Silver et~al.(2016)Silver, Huang, Maddison, Guez, Sifre, Van
+  Den~Driessche, Schrittwieser, Antonoglou, Panneershelvam, Lanctot,
+  et~al.]{silver2016mastering}
+Silver, D., Huang, A., Maddison, C.~J., Guez, A., Sifre, L., Van Den~Driessche,
+  G., Schrittwieser, J., Antonoglou, I., Panneershelvam, V., Lanctot, M.,
+  et~al.
+\newblock Mastering the game of go with deep neural networks and tree search.
+\newblock \emph{nature}, 529\penalty0 (7587):\penalty0 484, 2016.
+
+\bibitem[Sortino \& Price(1994)Sortino and Price]{sortino1994performance}
+Sortino, F.~A. and Price, L.~N.
+\newblock Performance measurement in a downside risk framework.
+\newblock \emph{the Journal of Investing}, 3\penalty0 (3):\penalty0 59--64,
+  1994.
+
+\bibitem[Sun et~al.(2017)Sun, Venkatraman, Gordon, Boots, and
+  Bagnell]{sun2017deeply}
+Sun, W., Venkatraman, A., Gordon, G.~J., Boots, B., and Bagnell, J.~A.
+\newblock Deeply aggrevated: Differentiable imitation learning for sequential
+  prediction.
+\newblock \emph{arXiv preprint arXiv:1703.01030}, 2017.
+
+\bibitem[Sutton \& Barto(2018)Sutton and Barto]{sutton2018reinforcement}
+Sutton, R.~S. and Barto, A.~G.
+\newblock \emph{Reinforcement learning: An introduction}.
+\newblock MIT press, 2018.
+
+\bibitem[van~den Oord et~al.(2018)van~den Oord, Li, Babuschkin, Simonyan,
+  Vinyals, Kavukcuoglu, van~den Driessche, Lockhart, Cobo, Stimberg,
+  Casagrande, Grewe, Noury, Dieleman, Elsen, Kalchbrenner, Zen, Graves, King,
+  Walters, Belov, and Hassabis]{pmlr-v80-oord18a}
+van~den Oord, A., Li, Y., Babuschkin, I., Simonyan, K., Vinyals, O.,
+  Kavukcuoglu, K., van~den Driessche, G., Lockhart, E., Cobo, L., Stimberg, F.,
+  Casagrande, N., Grewe, D., Noury, S., Dieleman, S., Elsen, E., Kalchbrenner,
+  N., Zen, H., Graves, A., King, H., Walters, T., Belov, D., and Hassabis, D.
+\newblock Parallel {W}ave{N}et: Fast high-fidelity speech synthesis.
+\newblock In Dy, J. and Krause, A. (eds.), \emph{Proceedings of the 35th
+  International Conference on Machine Learning}, volume~80 of \emph{Proceedings
+  of Machine Learning Research}, pp.\  3918--3926, Stockholmsmässan, Stockholm
+  Sweden, 10--15 Jul 2018. PMLR.
+\newblock URL \url{http://proceedings.mlr.press/v80/oord18a.html}.
+
+\end{thebibliography}

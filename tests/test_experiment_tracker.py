@@ -4,6 +4,8 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace
 
+import pandas as pd
+
 from utils.experiment_tracker import ExperimentTracker
 
 
@@ -18,11 +20,13 @@ class ExperimentTrackerTest(unittest.TestCase):
             tracker = ExperimentTracker(config, run_name="test_run")
             tracker.write_manifest(config)
             tracker.log_metrics("validation", 5, {"Sharpe Ratio": 1.2})
+            table_path = tracker.log_table("validation_trace", 5, pd.DataFrame({"portfolio_value": [10000.0]}))
 
             run_dir = Path(tmpdir) / "test_run"
             self.assertTrue((run_dir / "manifest.json").exists())
             self.assertTrue((run_dir / "config.json").exists())
             self.assertTrue((run_dir / "metrics.jsonl").exists())
+            self.assertTrue(table_path.exists())
 
             with (run_dir / "metrics.jsonl").open(encoding="utf-8") as handle:
                 record = json.loads(handle.readline())

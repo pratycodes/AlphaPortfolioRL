@@ -14,7 +14,8 @@ class ReplayBufferTest(unittest.TestCase):
         buffer.add(state, weights, weights, 0.0, state, weights, weights, done=False)
         buffer.add(state, weights, weights, 1.0, state, weights, weights, done=True)
 
-        *_, done = buffer.sample()
+        sample = buffer.sample()
+        done = sample[7]
         self.assertEqual(done.dtype, np.float32)
         self.assertEqual(done.shape, (2,))
         self.assertEqual(set(done.tolist()), {0.0, 1.0})
